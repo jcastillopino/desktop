@@ -1,1 +1,139 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicios de Fracciones con Pizza</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .canvas-container {
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    canvas {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ejercicios de Fracciones: Pizza</h1>
+  <div class="container">
+    <div class="canvas-container">
+      <h2>Pizza dividida en 2 partes (1/2 cada una)</h2>
+      <canvas id="pizza2" width="300" height="300"></canvas>
+    </div>
+    <div class="canvas-container">
+      <h2>Pizza dividida en 4 partes (1/4 cada una)</h2>
+      <canvas id="pizza4" width="300" height="300"></canvas>
+    </div>
+  </div>
+  <script>
+    // Función para dibujar una pizza dividida en 2 partes
+    function drawPizzaDividedIn2(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 100;
+        
+        // Dibuja la pizza (círculo)
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Dibuja la línea divisoria (horizontal)
+        ctx.beginPath();
+        ctx.moveTo(centerX - radius, centerY);
+        ctx.lineTo(centerX + radius, centerY);
+        ctx.stroke();
+        
+        // Colorea una mitad (por ejemplo, la superior)
+        ctx.fillStyle = "rgba(255, 165, 0, 0.5)"; // naranja claro
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, 0, Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    // Función para dibujar una pizza dividida en 4 partes
+    function drawPizzaDividedIn4(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 100;
+        
+        // Dibuja la pizza (círculo)
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Dibuja las líneas divisorias (horizontal y vertical)
+        // Línea horizontal
+        ctx.beginPath();
+        ctx.moveTo(centerX - radius, centerY);
+        ctx.lineTo(centerX + radius, centerY);
+        ctx.stroke();
+        
+        // Línea vertical
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - radius);
+        ctx.lineTo(centerX, centerY + radius);
+        ctx.stroke();
+        
+        // Colorea dos cuartos para demostrar que 2/4 = 1/2
+        ctx.fillStyle = "rgba(100, 149, 237, 0.5)"; // azul claro
+        
+        // Primer cuarto: superior derecho
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, 0, Math.PI / 2, false);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Segundo cuarto: inferior izquierdo
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, Math.PI, 1.5 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+
+    // Dibujar las pizzas cuando se cargue la ventana
+    window.onload = function() {
+      drawPizzaDividedIn2("pizza2");
+      drawPizzaDividedIn4("pizza4");
+    };
+  </script>
+</body>
+</html>
